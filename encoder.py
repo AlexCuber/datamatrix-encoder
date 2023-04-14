@@ -41,14 +41,16 @@ def replace_table_in_file(file_path, new_matrix):
         raise ValueError("Table not found in the .TAB file")
 
     n = len(new_matrix) 
-    header_elements = ["NR"] + [f"F{i}" for i in range(1, n + 1)]
-    header = "\t".join(header_elements) + "\n"
+    #header_elements = ["NN"] + [f"F{i}" for i in range(1, n + 1)]
+    #header = "".join(f"{element:<9}" for element in header_elements) + "\n"
+    #header = 'NN      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12      '
+    
+    #print(header)
     #formatted_matrix = [header]
     formatted_matrix = []
     for i, row in enumerate(new_matrix):
-        row_str = f"{i + 1:<7}"
-        row_str += '\t'.join(f"{cell:<7}" for cell in row)
-        row_str += '\n'
+        row_str = f"{i + 1:<8}"
+        row_str += "".join(f"{cell:<9}" for cell in row) + "\n"
         formatted_matrix.append(row_str)
 
     lines[start_idx :end_idx] = formatted_matrix
@@ -59,10 +61,10 @@ def replace_table_in_file(file_path, new_matrix):
     with open("test.TAB", 'w') as file:
         file.writelines(lines)
     
-    
+
     
 # Generate the Data Matrix barcode image
-data = 'XYZ1234'
+data = 'ZZZ0000'
 encoded = encode(data.encode('utf8'))
 
 # Convert the Encoded object to an image
